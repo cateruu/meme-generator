@@ -4,7 +4,7 @@ import memeData from "../memeData";
 
 const Form = () => {
 
-  const [memeImg, setMemeImg] = useState();
+  const [memeImg, setMemeImg] = useState('');
 
   const getImg = () => {
     const memes = memeData.data.memes;
