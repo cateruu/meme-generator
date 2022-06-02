@@ -68,3 +68,9 @@ body {
   cursor: pointer;
   font-family: 'Karla', sans-serif;
 }
+
+.meme__image {
+  margin-top: 36px;
+  width: 100%;
+  border-radius: 2px;
+}
