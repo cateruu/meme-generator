@@ -9,11 +9,12 @@ const Form = () => {
     randomImg: 'https://i.imgflip.com/3lmzyx.jpg',
   });
 
-  const [allMemeImages, setAllMemeImages] = useState(memeData.data.memes);
+  const [allMemeImages, setAllMemeImages] = useState(memeData);
 
   const getImg = () => {
-    const randomNumber = Math.floor(Math.random() * allMemeImages.length);
-    const imgUrl = allMemeImages[randomNumber].url;
+    const memesArray = allMemeImages.data.memes;
+    const randomNumber = Math.floor(Math.random() * memesArray.length);
+    const imgUrl = memesArray[randomNumber].url;
 
     setMeme((prevState) => {
       return {
