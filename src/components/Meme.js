@@ -8,16 +8,16 @@ const Meme = () => {
     randomImg: 'https://i.imgflip.com/3lmzyx.jpg',
   });
 
-  const [allMemes, setAllMemes] = useState('');
+  const [allMemes, setAllMemes] = useState([]);
 
   useEffect(() => {
     fetch('https://api.imgflip.com/get_memes')
       .then((res) => res.json())
-      .then((data) => setAllMemes(data));
+      .then((data) => setAllMemes(data.data.memes));
   }, []);
 
   const getImg = () => {
-    const memesArray = allMemes.data.memes;
+    const memesArray = allMemes;
     const randomNumber = Math.floor(Math.random() * memesArray.length);
     const imgUrl = memesArray[randomNumber].url;
 
