@@ -11,15 +11,19 @@ const Meme = () => {
   const [allMemes, setAllMemes] = useState([]);
 
   useEffect(() => {
-    fetch('https://api.imgflip.com/get_memes')
-      .then((res) => res.json())
-      .then((data) => setAllMemes(data.data.memes));
+    const getMemes = async () => {
+      const response = await fetch('https://api.imgflip.com/get_memes');
+      const data = await response.json();
+
+      setAllMemes(data);
+    };
+
+    getMemes();
   }, []);
 
   const getImg = () => {
-    const memesArray = allMemes;
-    const randomNumber = Math.floor(Math.random() * memesArray.length);
-    const imgUrl = memesArray[randomNumber].url;
+    const randomNumber = Math.floor(Math.random() * allMemes.length);
+    const imgUrl = allMemes[randomNumber].url;
 
     setMeme((prevState) => {
       return {
