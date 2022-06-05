@@ -1,6 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
-import memeData from '../memeData';
+import { useState, useEffect } from 'react';
 
 const Meme = () => {
   const [meme, setMeme] = useState({
@@ -9,10 +8,16 @@ const Meme = () => {
     randomImg: 'https://i.imgflip.com/3lmzyx.jpg',
   });
 
-  const [allMemeImages] = useState(memeData);
+  const [allMemes, setAllMemes] = useState('');
+
+  useEffect(() => {
+    fetch('https://api.imgflip.com/get_memes')
+      .then((res) => res.json())
+      .then((data) => setAllMemes(data));
+  }, []);
 
   const getImg = () => {
-    const memesArray = allMemeImages.data.memes;
+    const memesArray = allMemes.data.memes;
     const randomNumber = Math.floor(Math.random() * memesArray.length);
     const imgUrl = memesArray[randomNumber].url;
 
@@ -44,6 +49,7 @@ const Meme = () => {
           placeholder='Top text'
           name='topText'
           onChange={handleChange}
+          value={meme.topText}
         />
         <input
           type='text'
@@ -51,6 +57,7 @@ const Meme = () => {
           placeholder='Bottom text'
           name='bottomText'
           onChange={handleChange}
+          value={meme.bottomText}
         />
       </form>
       <button className='meme__button' onClick={getImg}>
